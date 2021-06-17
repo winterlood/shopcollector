@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
+import fs from "fs";
+import path from "path";
+import { getStoredPostList, getPostData } from "lib/posts";
+
+const postsDirectory = path.join(process.cwd(), "posts");
+
 type Props = {};
-const Product = ({ paths, product }) => {
-    console.log(product);
-    const nowProduct = JSON.parse(product);
-    console.log(nowProduct);
+const Product = ({ postData }) => {
+    const pageData = postData.data;
     return (
         <div className="Product">
-            <h2>{nowProduct.title}</h2>
+            <h2>{pageData.title}</h2>
 
             <div className="item_list">
-                {nowProduct.item_list.map((it) => (
+                {pageData.item_list.map((it) => (
                     <div className="card">
                         <div className="img">
                             <img src={it.product_image} />
@@ -28,22 +32,20 @@ const Product = ({ paths, product }) => {
     );
 };
 
+export async function getStaticProps({ params }) {
+    const postData = getPostData(params.id);
+    console.log(postData);
+    return {
+        props: {
+            postData,
+        },
+    };
+}
+
 export async function getStaticPaths() {
-    const res = await fetch("https://jsonplaceholder.typicode.com/users");
-    const users = await res.json();
-
-    const paths = users.map((user) => ({
-        params: { product: user.id.toString() },
-    }));
-
+    const post_list = getStoredPostList();
+    const paths = post_list;
     return { paths, fallback: false };
 }
 
-export async function getStaticProps({ params }) {
-    console.log(params);
-    const filename = "2015.json";
-    const file = require(`posts/${filename}`);
-    const product = JSON.stringify(file);
-    return { props: { product } };
-}
 export default Product;
