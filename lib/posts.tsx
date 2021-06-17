@@ -5,8 +5,8 @@ const postsDirectory = path.join(process.cwd(), "_posts");
 
 export function getPostData(id) {
     const fullPath = path.join(postsDirectory, `${id}.json`);
-    const fileContent = fs.readFileSync(fullPath, "utf-8");
-    return { id: id, data: JSON.parse(fileContent) };
+    const fileContent = fs.readFileSync(fullPath, "utf8");
+    return { id: id, data: fileContent };
 }
 
 export function getStoredPostList() {
@@ -26,7 +26,8 @@ export function getSortedPostsData() {
     const fileNames = fs.readdirSync(postsDirectory);
     const allPostsData = fileNames.map((fileName) => {
         // Remove ".md" from file name to get id
-        const id = fileName.replace(/\.json$/, "");
+        var id = fileName.replace(/\.json$/, "");
+        id = id.split("@")[0];
 
         // Read markdown file as string
         const fullPath = path.join(postsDirectory, fileName);
