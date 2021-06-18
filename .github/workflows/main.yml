@@ -1,9 +1,8 @@
 name: Run Cupapi
 
 on:
-  push:
-    branches:
-      - main
+     schedule:
+         - cron: "0 */5 * * *"
 jobs:
     build:
         runs-on: ubuntu-latest
