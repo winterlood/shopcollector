@@ -45,7 +45,7 @@ def main():
     recent_file_name = recent_file[0]
     last_number = int(recent_file_name.split('@')[1].split('.json')[0])
 
-    # 다음에 호출할 카테고리 번호 구하기
+    # 다음에 호출할 카테고리 번호 구하기!
     next_index = 0
     now_index = request_list.index(last_number)
     if now_index == len(request_list)-1:
