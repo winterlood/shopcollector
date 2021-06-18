@@ -1,8 +1,13 @@
-import "../styles/globals.css";
-import "styles/testStyle.scss";
+import "styles/globals.scss";
 import "styles/product.scss";
+import "styles/Layout.scss";
 function MyApp({ Component, pageProps }) {
-    return <Component {...pageProps} />;
+    return (
+        <div>
+            <Component {...pageProps} />
+            <footer></footer>
+        </div>
+    );
 }
 
 export default MyApp;

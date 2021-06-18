@@ -1,52 +1,111 @@
 .Product {
-    h2 {
+    .page_header {
+        margin-bottom: 30px;
         text-align: center;
+        h2 {
+            font-family: "bold";
+            margin-bottom: 0px;
+        }
+        span {
+            color: gray;
+        }
     }
     .item_list {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-
         .card {
-            border: 1px solid #eee;
-            border-radius: 5px;
-            height: 390px;
-            width: 230px;
-            padding: 10px;
+            overflow: hidden;
+            background-color: white;
+            height: 400px;
+            width: 300px;
+            position: relative;
+
             margin: 0px 10px 30px 10px;
             text-align: center;
-            font-family: "NanumGothic", "serif";
             box-sizing: content-box;
             line-height: 1.3;
             color: #434343;
-            img {
-                height: 230px;
-                width: 230px;
-            }
-            .price {
-                margin-top: 15px;
-                height: 40px;
-                font-size: 18px;
-                font-weight: bold;
-                color: red;
-            }
-            .click {
+
+            border-radius: 5px;
+            border: 0.5px solid rgb(235, 235, 249);
+            box-shadow: rgba(133, 139, 146, 0.06) 8px 8px 16px 4px;
+            .mask {
+                opacity: 0;
                 display: flex;
-                justify-content: center;
-            }
-            .click a {
-                background: black;
-                border: 2px solid white;
                 border-radius: 5px;
-                padding: 5px 10px;
-                transition: 0.5s ease;
-                width: 80%;
-                color: white;
-                font-size: 15px;
-                text-decoration: none;
-                font-weight: bold;
-                display: block;
+                background-color: rgba(235, 235, 249, 0.5);
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                backdrop-filter: blur(1px);
+
+                .cup_btn {
+                    border: 2px solid gray;
+                    border-radius: 15px;
+                    padding-left: 20px;
+                    padding-right: 20px;
+                    padding-top: 5px;
+                    padding-bottom: 5px;
+
+                    border-color: rgb(0, 122, 255);
+                    color: rgb(0, 122, 255);
+                    font-family: "bold";
+                }
+                .cup_btn:hover {
+                    transition: 0.3s;
+                    background-color: rgb(0, 122, 255);
+                    color: white;
+                }
             }
+
+            .img_div {
+                height: 250px;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            .info_div {
+                padding-left: 10px;
+                padding-right: 10px;
+                text-align: left;
+                .product_name {
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    line-height: 30px;
+                    max-height: 80px;
+                    height: 80px;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+
+                    h5 {
+                        font-size: 15px;
+                        font-weight: 700;
+                        color: rgb(34, 40, 49);
+                        font-family: "regular";
+                    }
+                }
+                .price {
+                    height: 40px;
+                    font-weight: bold;
+                    color: rgb(0, 122, 255);
+
+                    border-top: 1px solid rgb(230, 230, 230);
+                    padding-top: 10px;
+                    margin-top: 10px;
+                    font-size: 25px;
+                }
+            }
+        }
+
+        .card:hover > .mask {
+            transition: 0.2s;
+            opacity: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     }
 }

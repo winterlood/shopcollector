@@ -1,0 +1,40 @@
+@font-face {
+    font-family: "thin";
+    src: url("./../fonts/NotoSansCJKkr-Thin.otf") format("truetype");
+}
+@font-face {
+    font-family: "regular";
+    src: url("./../fonts/NotoSansCJKkr-Regular.otf") format("truetype");
+}
+@font-face {
+    font-family: "medium";
+    src: url("./../fonts/NotoSansCJKkr-Medium.otf") format("truetype");
+}
+@font-face {
+    font-family: "light";
+    src: url("./../fonts/NotoSansCJKkr-Light.otf") format("truetype");
+}
+@font-face {
+    font-family: "Bold";
+    src: url("./../fonts/NotoSansCJKkr-Bold.otf") format("truetype");
+}
+@font-face {
+    font-family: "Black";
+    src: url("./../fonts/NotoSansCJKkr-Black.otf") format("truetype");
+}
+html,
+body {
+    background-color: rgb(246, 247, 251);
+    padding: 20;
+    margin: 0;
+    font-family: "NanumGothic";
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+* {
+    box-sizing: border-box;
+}

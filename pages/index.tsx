@@ -4,10 +4,7 @@ import Link from "next/link";
 import { getStoredPostList } from "lib/posts";
 
 const Home = (props) => {
-    console.log(props);
-
     const { postData } = props;
-    console.log(postData);
     return (
         <div>
             <Head>
@@ -20,7 +17,7 @@ const Home = (props) => {
                 <div>
                     {postData.map((item, idx) => {
                         return (
-                            <Link href={`/posts/${item.params.id}`}>
+                            <Link href={`/dailybest/${item.params.id}`}>
                                 <div>
                                     <a>{item.params.id}</a>
                                 </div>
@@ -34,9 +31,7 @@ const Home = (props) => {
 };
 
 export async function getStaticProps({ params }) {
-    console.log(params);
     const postData = getStoredPostList();
-    console.log(postData);
     return {
         props: {
             postData,
