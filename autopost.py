@@ -38,7 +38,7 @@ def main():
     file_name_and_time_lst = []
     for f_name in os.listdir(f"{files_Path}"):
         print(f_name)
-        written_time = os.path.getctime(f"{files_Path}{f_name}")
+        written_time = os.path.getmtime(f"{files_Path}{f_name}")
         file_name_and_time_lst.append((f_name, written_time))
     sorted_file_lst = sorted(file_name_and_time_lst, key=lambda x: x[1], reverse=True)
     recent_file = sorted_file_lst[0]
