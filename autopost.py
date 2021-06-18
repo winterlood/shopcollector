@@ -33,21 +33,23 @@ def main():
 	'유아동패션',
     ]
 
-    #[STEP 1] : GET LAST FILE SEQUENCE
+
+   
+
     files_Path = f"{now_path}/_posts/" 
     file_name_and_time_lst = []
     for f_name in os.listdir(f"{files_Path}"):
-        print(f_name)
-        written_time = os.path.getmtime(f"{files_Path}{f_name}")
-        file_name_and_time_lst.append((f_name, written_time))
-    sorted_file_lst = sorted(file_name_and_time_lst, key=lambda x: x[1], reverse=True)
-    recent_file = sorted_file_lst[0]
-    recent_file_name = recent_file[0]
-    last_number = int(recent_file_name.split('@')[1].split('.json')[0])
+        modifyTime = f_name.split('@')[0].split('-')[1]
+        categoryCode = f_name.split('@')[1].split('.json')[0] 
+        file_name_and_time_lst.append((modifyTime,categoryCode))
+
+    sorted_file_list = sorted(file_name_and_time_lst, key=lambda tup: tup[1],reverse=True)
+
+    print("가장 마지막 수정된 파일 : ",sorted_file_list[0][1])
 
     # 다음에 호출할 카테고리 번호 구하기!
     next_index = 0
-    now_index = request_list.index(last_number)
+    now_index = request_list.index(int(sorted_file_list[0][1]))
     if now_index == len(request_list)-1:
         next_index = 0
     else:
@@ -92,8 +94,8 @@ def main():
         resDict['item_list'].append(curDict)
 
     # SAVE JSON
-    cur_time = datetime.datetime.now()
-    save_time = f'{str(cur_time.year)}{str(cur_time.month)}{str(cur_time.day)}'
+    cur_time =datetime.datetime.utcnow().strftime('%Y%m%d%H%M%S%f')
+    save_time = f'{str(cur_time)}'
     with open(f'{now_path}/_posts/{category}-{save_time}@{categoryId}.json', 'w', encoding='UTF-8') as file:
         file.write(json.dumps(resDict, ensure_ascii=False))
 
