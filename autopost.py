@@ -4,7 +4,7 @@ import json
 import datetime
 import time
 now_path = os.path.dirname(os.path.abspath(__file__))
-file = open(f'{now_path}\\metadata\\setting.json',
+file = open(f'{now_path}/metadata/setting.json',
             'r', encoding='utf-8')
 config_dict = json.load(file)
 
@@ -34,7 +34,7 @@ def main():
     ]
 
     #[STEP 1] : GET LAST FILE SEQUENCE
-    files_Path = f"{now_path}/_posts//" 
+    files_Path = f"{now_path}/_posts/" 
     file_name_and_time_lst = []
     for f_name in os.listdir(f"{files_Path}"):
         written_time = os.path.getctime(f"{files_Path}{f_name}")
@@ -93,7 +93,7 @@ def main():
     # SAVE JSON
     cur_time = datetime.datetime.now()
     save_time = f'{str(cur_time.year)}{str(cur_time.month)}{str(cur_time.day)}'
-    with open(f'{now_path}//_posts//{category}-{save_time}@{categoryId}.json', 'w', encoding='UTF-8') as file:
+    with open(f'{now_path}/_posts/{category}-{save_time}@{categoryId}.json', 'w', encoding='UTF-8') as file:
         file.write(json.dumps(resDict, ensure_ascii=False))
 
 if __name__ == "__main__":
