@@ -8,7 +8,7 @@ import json
 from time import gmtime, strftime
 
 now_path = os.path.dirname(os.path.realpath(__file__))
-file = open(f'{now_path}\\metadata\\setting.json',
+file = open(f'{now_path}/metadata/setting.json',
             'r', encoding='utf-8')
 config_dict = json.load(file)
 
