@@ -2,7 +2,18 @@ import React from "react";
 import fs from "fs";
 import { getStoredPostList } from "lib/posts";
 import { renderToStaticMarkup } from "react-dom/server";
-
+// ${staticPages
+//     .map((url) => {
+//         return `
+//       <url>
+//         <loc>${url}</loc>
+//         <lastmod>${new Date().toISOString()}</lastmod>
+//         <changefreq>monthly</changefreq>
+//         <priority>1.0</priority>
+//       </url>
+//     `;
+//     })
+//     .join("")}
 const Sitemap = () => {};
 
 export const getServerSideProps = async ({ res }) => {
@@ -11,14 +22,14 @@ export const getServerSideProps = async ({ res }) => {
         production: "https://shopcollector.vercel.app",
     }[process.env.NODE_ENV];
 
-    const staticPages = fs
-        .readdirSync("pages")
-        .filter((staticPage) => {
-            return !["_app.js", "_document.js", "_error.js", "sitemap.xml.js"].includes(staticPage);
-        })
-        .map((staticPagePath) => {
-            return `${baseUrl}/${staticPagePath}`;
-        });
+    // const staticPages = fs
+    //     .readdirSync("pages")
+    //     .filter((staticPage) => {
+    //         return !["_app.js", "_document.js", "_error.js", "sitemap.xml.js"].includes(staticPage);
+    //     })
+    //     .map((staticPagePath) => {
+    //         return `${baseUrl}/${staticPagePath}`;
+    //     });
 
     const postPages = getStoredPostList().map((it) => {
         var url = `https://shopcollector.vercel.app/dailybest/${it.params.id}`;
@@ -47,18 +58,7 @@ export const getServerSideProps = async ({ res }) => {
       </url>
         `;
     })}
-      ${staticPages
-          .map((url) => {
-              return `
-            <url>
-              <loc>${url}</loc>
-              <lastmod>${new Date().toISOString()}</lastmod>
-              <changefreq>monthly</changefreq>
-              <priority>1.0</priority>
-            </url>
-          `;
-          })
-          .join("")}
+   
     </urlset>
   `;
 
