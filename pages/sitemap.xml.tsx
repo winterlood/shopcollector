@@ -12,7 +12,7 @@ export async function getServerSideProps({ res }) {
         const date = getDateById(id, "DATE");
         return {
             url: `https://shopcollector.vercel.app/dailybest/${id}`,
-            date: date,
+            date: new Date(date),
         };
     });
 
