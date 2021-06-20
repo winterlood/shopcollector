@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
 import globby from "globby";
 type Props = {};
-const Test = (props) => {
-    console.log(props);
-    return <div>{props.pages.length}</div>;
-};
+const Test = () => {};
 
 // ${postPages.map((item) => {
 //     return `
@@ -31,6 +28,9 @@ export async function getServerSideProps({ res }) {
     res.setHeader("Content-Type", "text/xml");
     res.write(sitemap);
     res.end();
+    return {
+        props: {},
+    };
 }
 
 export default Test;
