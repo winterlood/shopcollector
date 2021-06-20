@@ -69,7 +69,7 @@ export const getImageByCategory = (category: meta_types.DailyBestItem["category"
     return "";
 };
 
-const getDateById = (id: string, type: "KOR" | "PURE" | "PUREDASH") => {
+export const getDateById = (id: string, type: "KOR" | "PURE" | "DATE") => {
     const rawDate = id.split("@")[0].split("-");
     const fullDate = rawDate[rawDate.length - 1];
     const year = fullDate.slice(0, 4);
@@ -80,11 +80,11 @@ const getDateById = (id: string, type: "KOR" | "PURE" | "PUREDASH") => {
     } else if (type === "PURE") {
         return `${year}${month}${day}`;
     } else {
-        return ``;
+        return new Date(`${year}-${month}-${day}`);
     }
 };
 
-const getCategoryById = (id: string): meta_types.DailyBestCategory => {
+export const getCategoryById = (id: string): meta_types.DailyBestCategory => {
     // @ts-ignore
     return id.split("-2")[0];
 };
