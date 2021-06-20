@@ -35,16 +35,17 @@ function main() {
        xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
      xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-         ${postPages.map((item) => {
-             return `
-             <url>
+         ${postPages
+             .map((item) => {
+                 return `<url>
              <loc>${item.url}</loc>
              <lastmod>${item.date}</lastmod>
              <changefreq>monthly</changefreq>
              <priority>1.0</priority>
            </url>
-             `;
-         })}
+           `;
+             })
+             .join("")}
         </urlset>
       `;
     console.log("SITEMAP GENERATED!!!");
