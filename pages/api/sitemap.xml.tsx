@@ -9,7 +9,6 @@ export default async (req, res) => {
 
     const postPages = getStoredPostList().map((it) => {
         var url = `https://shopcollector.vercel.app/dailybest/${it.params.id}`;
-
         var createTime = it.params.pureCreatedDate;
         var year = createTime.slice(0, 4);
         var month = createTime.slice(4, 6);
