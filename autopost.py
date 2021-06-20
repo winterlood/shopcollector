@@ -33,17 +33,15 @@ def main():
 	'유아동패션',
     ]
 
-
-   
-
     files_Path = f"{now_path}/_posts/" 
     file_name_and_time_lst = []
     for f_name in os.listdir(f"{files_Path}"):
-        modifyTime = f_name.split('@')[0].split('-')[1]
+        timeSplitedString = f_name.split('@')[0].split('-')
+        modifyTime = timeSplitedString[len(timeSplitedString)-1]
         categoryCode = f_name.split('@')[1].split('.json')[0] 
         file_name_and_time_lst.append((modifyTime,categoryCode))
 
-    sorted_file_list = sorted(file_name_and_time_lst, key=lambda tup: tup[1],reverse=True)
+    sorted_file_list = sorted(file_name_and_time_lst, key=lambda tup: tup[0],reverse=True)
 
     print("가장 마지막 수정된 파일 : ",sorted_file_list[0][1])
 
