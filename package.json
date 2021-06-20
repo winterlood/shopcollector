@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
+    "fetch": "^1.1.0",
     "fs": "0.0.1-security",
     "globby": "^11.0.4",
     "next": "11.0.0",

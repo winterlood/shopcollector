@@ -1,6 +1,7 @@
 //@ts-ignore
 const fs = require("fs");
 const path = require("path");
+const fetch = require("node-fetch");
 
 const getDateById = (id, type) => {
     const rawDate = id.split("@")[0].split("-");
@@ -51,6 +52,10 @@ function main() {
     console.log("SITEMAP GENERATED!!!");
     console.log(sitemap);
     fs.writeFileSync(path.join("./.next/static", "sitemap.xml"), sitemap);
+
+    fetch("http://www.google.com/ping?sitemap=https://shopcollector.vercel.app/sitemap.xml").then(() =>
+        console.log("SUCCESS TO PING")
+    );
 }
 
 main();
