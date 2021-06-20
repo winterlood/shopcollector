@@ -8,6 +8,7 @@ const Header = () => {
                 width="100%"
                 height="44"
                 scrolling="no"
+                frameBorder="0"
                 referrerPolicy="unsafe-url"
             ></iframe>
         </div>
