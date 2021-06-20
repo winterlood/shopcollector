@@ -5,17 +5,20 @@ import { getStoredPostList, getPostData, getImageByCategory } from "lib/posts";
 import Layout from "component/Layout";
 import Head from "next/head";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 
 const ProudctItem = ({ productName, productImage, productPrice, productUrl }) => {
     const linkRef = useRef(null);
     return (
-        <div className="card">
+        <div
+            className="card"
+            onClick={() => {
+                if (linkRef.current) {
+                    linkRef.current.click();
+                }
+            }}
+        >
             <div
-                onClick={() => {
-                    if (linkRef.current) {
-                        linkRef.current.click();
-                    }
-                }}
                 className="img_div"
                 style={{
                     backgroundImage: `url('${productImage}')`,
@@ -47,12 +50,15 @@ const Product = ({ postData }) => {
             .map((it) => it.productName)} 외 20개의 상품 추천`,
         image: postData.thumbnailImage,
     };
+    const DynamicCupDynamic = dynamic(() => import("component/CupAd"));
+
     return (
         <Layout>
             <Head>
                 <title>
                     {postData.createdDate} {pageData.title} 데일리 베스트 TOP 20
                 </title>
+                <meta name="viewport" content="initial-scale=1.0, width=device-width"></meta>
                 <meta property="og:title" content={ogObj.title} />
                 <meta property="og:description" content={ogObj.description} />
                 <meta property="og:image" content={ogObj.image} />
@@ -77,26 +83,10 @@ const Product = ({ postData }) => {
                 </div>
 
                 <div className="item_list">
-                    <div className="top_banner center">
-                        <iframe
-                            src="https://ads-partners.coupang.com/widgets.html?id=492774&template=carousel&trackingCode=AF5219904&subId=&width=680&height=140"
-                            width="2000"
-                            height="140"
-                            scrolling="no"
-                            referrerPolicy="unsafe-url"
-                            className="dynamic_banner"
-                        ></iframe>
-                    </div>
+                    <DynamicCupDynamic />
                     {pageData?.item_list?.map((it, idx) => (
                         <ProudctItem key={`PRODUCTITEM::${idx}`} {...it} />
                     ))}
-                    <iframe
-                        src="https://ads-partners.coupang.com/widgets.html?id=425184&template=banner&trackingCode=AF5219904&subId=&width=728&height=90"
-                        width="728"
-                        height="90"
-                        scrolling="no"
-                        referrerPolicy="unsafe-url"
-                    ></iframe>
                 </div>
             </div>
         </Layout>

@@ -71,23 +71,44 @@ a {
             font-size: 18px;
         }
         .section_item_list {
-            display: grid;
-            justify-content: center;
-            grid-template-columns: repeat(auto-fill, minmax(200px, auto));
-            row-gap: 30px;
-            column-gap: 30px;
+            // MOBILE
+            @media screen and (max-width: 768px) {
+                display: grid;
+                justify-content: center;
+                grid-template-columns: repeat(auto-fill, minmax(170px, auto));
+                row-gap: 15px;
+                column-gap: 15px;
+            }
+
+            // DESKTOP
+            @media screen and (min-width: 768px) {
+                display: grid;
+                justify-content: center;
+                grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+                row-gap: 30px;
+                column-gap: 30px;
+            }
         }
         .DailyBestPostItem {
+            // MOBILE
+            @media screen and (max-width: 768px) {
+                width: 100%;
+                height: 150px;
+            }
+
+            // DESKTOP
+            @media screen and (min-width: 768px) {
+                width: 200px;
+                height: 200px;
+            }
             cursor: pointer;
-            width: 200px;
-            height: 200px;
+
             border-radius: 5px;
             border: 0.5px solid rgb(235, 235, 249);
             box-shadow: rgba(133, 139, 146, 0.06) 8px 8px 16px 4px;
 
             background-repeat: no-repeat;
             background-position: center;
-
             position: relative;
 
             .info {

@@ -1,6 +1,17 @@
 .Layout {
-    margin-top: 100px;
-    padding-left: 10%;
-    padding-right: 10%;
-    min-height: 80vh;
+    // MOBILE
+    @media screen and (max-width: 768px) {
+        margin-top: 100px;
+        padding-left: 3%;
+        padding-right: 3%;
+        min-height: 80vh;
+    }
+
+    // DESKTOP
+    @media screen and (min-width: 768px) {
+        margin-top: 100px;
+        padding-left: 10%;
+        padding-right: 10%;
+        min-height: 80vh;
+    }
 }
