@@ -77,8 +77,10 @@ const getDateById = (id: string, type: "KOR" | "PURE" | "PUREDASH") => {
     const day = fullDate.slice(6, 8);
     if (type === "KOR") {
         return `${year}년 ${month}월 ${day}일`;
-    } else {
+    } else if (type === "PURE") {
         return `${year}${month}${day}`;
+    } else {
+        return ``;
     }
 };
 

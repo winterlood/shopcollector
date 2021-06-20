@@ -7,9 +7,8 @@ const Header = () => {
                 src="https://coupa.ng/b12SOt"
                 width="100%"
                 height="44"
-                frameborder="0"
                 scrolling="no"
-                referrerpolicy="unsafe-url"
+                referrerPolicy="unsafe-url"
             ></iframe>
         </div>
     );
