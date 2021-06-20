@@ -5,7 +5,6 @@ import { meta_types } from "@global_types";
 const postsDirectory = path.join(process.cwd(), "_posts");
 
 export const getImageByCategory = (category: meta_types.DailyBestItem["category"]) => {
-    console.log(category);
     switch (category) {
         case "여성패션": {
             return "https://images.unsplash.com/photo-1583846539095-4dd7d202b00f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80";
@@ -70,7 +69,7 @@ export const getImageByCategory = (category: meta_types.DailyBestItem["category"
     return "";
 };
 
-const getDateById = (id: string, type: "KOR" | "PURE") => {
+const getDateById = (id: string, type: "KOR" | "PURE" | "PUREDASH") => {
     const rawDate = id.split("@")[0].split("-");
     const fullDate = rawDate[rawDate.length - 1];
     const year = fullDate.slice(0, 4);

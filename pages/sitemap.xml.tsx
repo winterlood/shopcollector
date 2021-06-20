@@ -21,10 +21,12 @@ export const getServerSideProps = ({ res }) => {
 
     const postPages = getStoredPostList().map((it) => {
         var url = `https://shopcollector.vercel.app/dailybest/${it.params.id}`;
-        var createTime = it.params.id.split("@")[0].split("-")[1].slice(0, 8);
+
+        var createTime = it.params.pureCreatedDate;
         var year = createTime.slice(0, 4);
         var month = createTime.slice(4, 6);
         var day = createTime.slice(6, 8);
+
         var date = new Date(`${year}-${month}-${day}`);
         return {
             url: url,

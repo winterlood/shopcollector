@@ -65,21 +65,19 @@ const Product = ({ postData }) => {
                             width="2000"
                             height="140"
                             scrolling="no"
-                            referrerpolicy="unsafe-url"
+                            referrerPolicy="unsafe-url"
                             className="dynamic_banner"
                         ></iframe>
                     </div>
                     {pageData?.item_list?.map((it, idx) => (
                         <ProudctItem key={`PRODUCTITEM::${idx}`} {...it} />
                     ))}
-
                     <iframe
                         src="https://ads-partners.coupang.com/widgets.html?id=425184&template=banner&trackingCode=AF5219904&subId=&width=728&height=90"
                         width="728"
                         height="90"
-                        frameborder="0"
                         scrolling="no"
-                        referrerpolicy="unsafe-url"
+                        referrerPolicy="unsafe-url"
                     ></iframe>
                 </div>
             </div>
