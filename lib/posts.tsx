@@ -93,7 +93,12 @@ export function getPostData(id) {
     const fullPath = path.join(postsDirectory, `${id}.json`);
     const createdDate = getDateById(id, "KOR");
     const fileContent = fs.readFileSync(fullPath, "utf8");
-    return { id: id, createdDate: createdDate, data: fileContent };
+    return {
+        id: id,
+        createdDate: createdDate,
+        thumbnailImage: getImageByCategory(getCategoryById(id)),
+        data: fileContent,
+    };
 }
 
 export function getStoredPostList(): Array<{ params: meta_types.DailyBestItem }> {

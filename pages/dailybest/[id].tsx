@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import fs from "fs";
 import path from "path";
-import { getStoredPostList, getPostData } from "lib/posts";
+import { getStoredPostList, getPostData, getImageByCategory } from "lib/posts";
 import Layout from "component/Layout";
 import Head from "next/head";
 import Link from "next/link";
@@ -37,13 +37,31 @@ const ProudctItem = ({ productName, productImage, productPrice, productUrl }) =>
 
 const Product = ({ postData }) => {
     const pageData = JSON.parse(postData.data);
-    console.log(postData.createdDate);
+    // console.log(pageData.createdDate);
+    console.log(postData);
+
+    const ogObj = {
+        title: `${postData.createdDate} ${pageData.title} 데일리 베스트 TOP 20`,
+        description: `[${pageData.title} TOP20 추천] : ${pageData?.item_list
+            .slice(0, 5)
+            .map((it) => it.productName)} 외 20개의 상품 추천`,
+        image: postData.thumbnailImage,
+    };
     return (
         <Layout>
             <Head>
                 <title>
                     {postData.createdDate} {pageData.title} 데일리 베스트 TOP 20
                 </title>
+                <meta property="og:title" content={ogObj.title} />
+                <meta property="og:description" content={ogObj.description} />
+                <meta property="og:image" content={ogObj.image} />
+                <meta property="og:site_name" content="쿠팡 실시간 데일리 베스트 TOP20" />
+                <meta property="og:type" content="product" />
+                <meta property="product:availability" content="instock" />
+                <meta property="product:price:currency" content="KRW" />
+                <meta property="article:published_time" content={postData.createdDate} />
+                <meta name="robots" content="index" />
             </Head>
             <div className="Product">
                 <div className="page_header">

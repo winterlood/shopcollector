@@ -7,7 +7,6 @@ import { meta_types } from "@global_types";
 import { url } from "inspector";
 
 const DailyBestPostItem = (props: meta_types.DailyBestItem) => {
-    console.log(props);
     const linkRef = useRef(null);
     return (
         <div
@@ -65,11 +64,30 @@ const Home = (props) => {
         }
     });
 
+    const ogObj = {
+        title: "실시간 데일리 베스트",
+        description: `${DayList.map((it) => {
+            const day = it.date;
+            const categories = it.itemList.map((item) => item.category + "TOP20").join(", ");
+            return `${day} : ${categories}`;
+        }).join(" / ")}`,
+        image: "https://images.unsplash.com/photo-1607083681678-52733140f93a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80",
+    };
+
+    console.log(ogObj.description);
     return (
         <Layout>
             <Head>
                 <title>실시간 데일리 베스트</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+
+                <meta property="og:title" content={ogObj.title} />
+                <meta property="og:description" content={ogObj.description} />
+                <meta property="og:image" content={ogObj.image} />
+                <meta property="og:site_name" content="쿠팡 실시간 데일리 베스트 TOP20" />
+                <meta property="og:type" content="product" />
+                <meta property="product:price:currency" content="KRW" />
+                <meta name="robots" content="index" />
             </Head>
             <div className="Home">
                 <div className="home_header">
