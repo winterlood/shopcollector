@@ -29,7 +29,13 @@ body {
     margin: 0;
     font-family: "NanumGothic";
 }
-
+p {
+    margin: 0px;
+}
+.center {
+    display: flex;
+    justify-content: center;
+}
 a {
     color: inherit;
     text-decoration: none;
@@ -37,4 +43,66 @@ a {
 
 * {
     box-sizing: border-box;
+}
+
+.Home {
+    text-align: center;
+    .home_header {
+        h2 {
+            text-align: center;
+            font-family: "bold";
+            font-size: 40px;
+            margin-bottom: 0px;
+        }
+        span {
+            font-family: "regular";
+            color: gray;
+        }
+        margin-bottom: 50px;
+    }
+
+    .DailyBestSectionItem {
+        margin-bottom: 100px;
+
+        h5 {
+            text-align: center;
+            font-family: bold;
+            color: rgb(0, 122, 255);
+            font-size: 18px;
+        }
+        .section_item_list {
+            display: grid;
+            justify-content: center;
+            grid-template-columns: repeat(auto-fill, minmax(200px, auto));
+            row-gap: 30px;
+            column-gap: 30px;
+        }
+        .DailyBestPostItem {
+            cursor: pointer;
+            width: 200px;
+            height: 200px;
+            border-radius: 5px;
+            border: 0.5px solid rgb(235, 235, 249);
+            box-shadow: rgba(133, 139, 146, 0.06) 8px 8px 16px 4px;
+
+            background-repeat: no-repeat;
+            background-position: center;
+
+            position: relative;
+
+            .info {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                height: 40px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+
+                font-family: "regular";
+            }
+        }
+    }
 }
