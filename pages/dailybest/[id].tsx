@@ -59,6 +59,8 @@ const Product = ({ postData }) => {
                     {postData.createdDate} {pageData.title} 데일리 베스트 TOP 20
                 </title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width"></meta>
+                <meta name="keywords" content={pageData.keyword} />
+                <meta name="description" content={ogObj.description} />
                 <meta property="og:title" content={ogObj.title} />
                 <meta property="og:description" content={ogObj.description} />
                 <meta property="og:image" content={ogObj.image} />
