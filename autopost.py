@@ -59,7 +59,7 @@ def main():
     categoryId = request_list[next_index]
 
     print(category,categoryId)
-    limit = 20
+    limit = 10
     product_list = cupang_search(categoryId,limit)
 
     print(category)
