@@ -1,0 +1,86 @@
+.ProductHome {
+    .keyword_list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 50px;
+
+        .KeywordItem {
+            cursor: pointer;
+            background-color: white;
+            padding-left: 15px;
+            padding-right: 15px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            margin: 5px;
+            box-shadow: rgba(133, 139, 146, 0.06) 8px 8px 16px 4px;
+
+            border-radius: 15px;
+            font-family: "medium";
+        }
+        .on {
+            background-color: rgb(115, 143, 255);
+            color: white;
+        }
+    }
+
+    .ProductDetailItem {
+        margin-bottom: 20px;
+        background-color: white;
+
+        padding: 10px;
+        color: #434343;
+        border-radius: 5px;
+
+        border: 0.5px solid rgb(235, 235, 249);
+        box-shadow: rgba(133, 139, 146, 0.06) 8px 8px 16px 4px;
+
+        display: flex;
+        justify-content: space-between;
+        .img_box {
+            width: 120px;
+            height: 120px;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+        }
+        .info_box {
+            flex-grow: 1;
+            margin-left: 10px;
+
+            .meta_info {
+                .rank {
+                    display: block;
+                    font-family: "bold";
+                    color: rgb(115, 143, 255);
+                    font-size: 1.2rem;
+                }
+                .category {
+                    color: gray;
+                    font-family: "regular";
+                    font-size: 0.8rem;
+                }
+                margin-bottom: 5px;
+            }
+            .title {
+                font-family: "bold";
+                font-size: 1rem;
+            }
+            .badge_list {
+                margin-top: 10px;
+                display: flex;
+                align-items: center;
+
+                img {
+                    width: 58px;
+                    height: 16px;
+                    margin-right: 10px;
+                }
+                .freeshipping {
+                    font-size: 0.8rem;
+                    color: rgb(255, 59, 59);
+                    font-family: "medium";
+                }
+            }
+        }
+    }
+}

@@ -3,7 +3,13 @@ import fs from "fs";
 import { meta_types } from "@global_types";
 
 const postsDirectory = path.join(process.cwd(), "_posts");
-
+function productNameSpinner(val: string) {
+    var pattern = /[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]/gi;
+    if (pattern.test(val)) {
+        val = val.replace(pattern, "");
+    }
+    return val;
+}
 export const getImageByCategory = (category: meta_types.DailyBestItem["category"]) => {
     switch (category) {
         case "여성패션": {
@@ -137,4 +143,51 @@ export function getSortedPostsData() {
     });
     // Sort posts by date
     return allPostsData;
+}
+
+export function getDetailPostData(id: string) {
+    const category_list = getStoredPostList();
+    var product_list = [];
+    category_list.forEach(({ params }) => {
+        const cur_category_data = JSON.parse(getPostData(params.id).data);
+        const cur_category_path_list = cur_category_data.item_list.map((it) => {
+            return {
+                params: {
+                    id: `${productNameSpinner(it.productName)}-${it.productId.toString()}`,
+                    ...it,
+                },
+            };
+        });
+        product_list = product_list.concat(cur_category_path_list);
+    });
+
+    var targetIdx = product_list.findIndex(({ params }) => params.productId.toString() === id);
+
+    return { ...product_list[targetIdx] };
+}
+
+export function getDetailPostList(isNeedValue?: boolean) {
+    const category_list = getStoredPostList();
+    var res_list = [];
+    category_list.forEach(({ params }) => {
+        const cur_category_data = JSON.parse(getPostData(params.id).data);
+        const cur_category_path_list = cur_category_data.item_list.map((it) => {
+            if (isNeedValue) {
+                return {
+                    params: {
+                        id: `${productNameSpinner(it.productName)}-${it.productId.toString()}`,
+                        ...it,
+                    },
+                };
+            } else {
+                return {
+                    params: {
+                        id: `${productNameSpinner(it.productName)}-${it.productId.toString()}`,
+                    },
+                };
+            }
+        });
+        res_list = res_list.concat(cur_category_path_list);
+    });
+    return res_list;
 }

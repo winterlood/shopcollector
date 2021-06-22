@@ -2,7 +2,13 @@
 const fs = require("fs");
 const path = require("path");
 const fetch = require("node-fetch");
-
+function productNameSpinner(val) {
+    var pattern = /[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9]/gi;
+    if (pattern.test(val)) {
+        val = val.replace(pattern, "");
+    }
+    return val;
+}
 const getDateById = (id, type) => {
     const rawDate = id.split("@")[0].split("-");
     const fullDate = rawDate[rawDate.length - 1];
@@ -18,7 +24,7 @@ const getDateById = (id, type) => {
     }
 };
 
-function main() {
+const getPostPages = () => {
     const postsDirectory = path.join(process.cwd(), "_posts");
     const fileNames = fs.readdirSync(postsDirectory);
     const postPages = fileNames.map((it) => {
@@ -29,6 +35,33 @@ function main() {
             date: new Date(date),
         };
     });
+    return postPages;
+};
+
+const getPostDetailPages = () => {
+    const postsDirectory = path.join(process.cwd(), "_posts");
+    const files = fs.readdirSync(postsDirectory);
+    let postDetailItemList = [];
+    files.forEach((file) => {
+        const id = file.split(".json")[0];
+        const date = getDateById(id, "DATE");
+
+        const fileContent = JSON.parse(fs.readFileSync(postsDirectory + "/" + file));
+        const curItemList = fileContent.item_list.map((item) => {
+            return {
+                url: `${productNameSpinner(item.productName)}-${item.productId}`,
+                date: new Date(date),
+            };
+        });
+        postDetailItemList = postDetailItemList.concat(curItemList);
+    });
+    return postDetailItemList;
+};
+
+function main() {
+    const postPages = getPostPages();
+    const postDetailPages = getPostDetailPages();
+
     const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
      xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
@@ -47,10 +80,20 @@ function main() {
            `;
              })
              .join("")}
+             ${postDetailPages
+                 .map((item) => {
+                     return `<url>
+                 <loc>${item.url}</loc>
+                 <lastmod>${item.date}</lastmod>
+                 <changefreq>monthly</changefreq>
+                 <priority>1.0</priority>
+                 </url>
+                 `;
+                 })
+                 .join("")}
         </urlset>
       `;
     console.log("SITEMAP GENERATED!!!");
-    console.log(sitemap);
     fs.writeFileSync(path.join("./.next/static", "sitemap.xml"), sitemap);
 
     fetch("http://www.google.com/ping?sitemap=https://shopcollector.vercel.app/sitemap.xml").then(() =>
