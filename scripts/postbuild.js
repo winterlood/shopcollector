@@ -30,10 +30,9 @@ const getPostPages = () => {
     const postPages = fileNames.map((it) => {
         const id = it.split(".json")[0];
         const date = new Date(getDateById(id, "DATE"));
-        const rawDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
         return {
             url: `https://shopcollector.vercel.app/dailybest/${id}`,
-            date: rawDate,
+            date: date.toISOString(),
         };
     });
     return postPages;
@@ -46,14 +45,13 @@ const getPostDetailPages = () => {
     files.forEach((file) => {
         const id = file.split(".json")[0];
         const date = new Date(getDateById(id, "DATE"));
-        const rawDate = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
         const fileContent = JSON.parse(fs.readFileSync(postsDirectory + "/" + file));
         const curItemList = fileContent.item_list.map((item) => {
             return {
                 url: `https://shopcollector.vercel.app/product/${productNameSpinner(item.productName)}-${
                     item.productId
                 }`,
-                date: rawDate,
+                date: date.toISOString(),
             };
         });
         postDetailItemList = postDetailItemList.concat(curItemList);
