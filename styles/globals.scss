@@ -46,83 +46,134 @@ a {
 }
 
 .Home {
-    text-align: center;
-    .home_header {
-        h2 {
-            text-align: center;
-            font-family: "bold";
-            font-size: 40px;
-            margin-bottom: 0px;
-        }
-        span {
-            font-family: "regular";
-            color: gray;
-        }
-        margin-bottom: 50px;
-    }
+    .section_item {
+        .item_header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-    .DailyBestSectionItem {
-        margin-bottom: 100px;
-
-        h5 {
-            text-align: center;
-            font-family: bold;
-            color: rgb(0, 122, 255);
-            font-size: 18px;
-        }
-        .section_item_list {
-            // MOBILE
-            @media screen and (max-width: 768px) {
-                display: grid;
-                justify-content: center;
-                grid-template-columns: repeat(auto-fill, minmax(170px, auto));
-                row-gap: 15px;
-                column-gap: 15px;
+            h4 {
+                font-family: "bold";
+                font-size: 1.3rem;
             }
-
-            // DESKTOP
-            @media screen and (min-width: 768px) {
-                display: grid;
-                justify-content: center;
-                grid-template-columns: repeat(auto-fill, minmax(200px, auto));
-                row-gap: 30px;
-                column-gap: 30px;
+            span {
+                font-family: "regular";
+                font-size: 1rem;
+                color: gray;
             }
         }
-        .DailyBestPostItem {
-            // MOBILE
-            @media screen and (max-width: 768px) {
-                width: 100%;
-                height: 150px;
+        .item_slide_list {
+            display: flex;
+
+            justify-content: space-around;
+            display: flex;
+            flex-wrap: nowrap;
+
+            overflow-x: scroll;
+            overflow-y: hidden;
+
+            .CategoryItem {
+                flex: 0 0 auto;
+
+                // MOBILE
+                @media screen and (max-width: 768px) {
+                    width: 100px;
+                    height: 100px;
+                }
+
+                // DESKTOP
+                @media screen and (min-width: 768px) {
+                    width: 150px;
+                    height: 130px;
+                }
+                margin-left: 10px;
+                margin-right: 10px;
+                margin-bottom: 15px;
+                cursor: pointer;
+
+                border-radius: 5px;
+                border: 0.5px solid rgb(235, 235, 249);
+                box-shadow: rgba(133, 139, 146, 0.06) 8px 8px 16px 4px;
+
+                background-repeat: no-repeat;
+                background-position: center;
+                position: relative;
+                .info {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    height: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: white;
+
+                    font-family: "regular";
+                }
             }
+        }
 
-            // DESKTOP
-            @media screen and (min-width: 768px) {
-                width: 200px;
-                height: 200px;
-            }
-            cursor: pointer;
-
-            border-radius: 5px;
-            border: 0.5px solid rgb(235, 235, 249);
-            box-shadow: rgba(133, 139, 146, 0.06) 8px 8px 16px 4px;
-
-            background-repeat: no-repeat;
-            background-position: center;
-            position: relative;
-
-            .info {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                right: 0;
-                height: 40px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
+        .item_vertical_list {
+            .ProductItem {
+                margin-bottom: 20px;
                 background-color: white;
 
-                font-family: "regular";
+                padding: 10px;
+                color: #434343;
+                border-radius: 5px;
+
+                border: 0.5px solid rgb(235, 235, 249);
+                box-shadow: rgba(133, 139, 146, 0.06) 8px 8px 16px 4px;
+
+                display: flex;
+                justify-content: space-between;
+                .img_box {
+                    width: 120px;
+                    height: 120px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                }
+                .info_box {
+                    flex-grow: 1;
+                    margin-left: 10px;
+
+                    .meta_info {
+                        .rank {
+                            display: block;
+                            font-family: "bold";
+                            color: rgb(115, 143, 255);
+                            font-size: 1.2rem;
+                        }
+                        .category {
+                            color: gray;
+                            font-family: "regular";
+                            font-size: 0.8rem;
+                        }
+                        margin-bottom: 5px;
+                    }
+                    .title {
+                        font-family: "bold";
+                        font-size: 1rem;
+                    }
+                    .badge_list {
+                        margin-top: 10px;
+                        display: flex;
+                        align-items: center;
+
+                        img {
+                            width: 58px;
+                            height: 16px;
+                            margin-right: 10px;
+                        }
+                        .freeshipping {
+                            font-size: 0.8rem;
+                            color: rgb(255, 59, 59);
+                            font-family: "medium";
+                        }
+                    }
+                }
             }
         }
     }

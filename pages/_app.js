@@ -3,6 +3,7 @@ import "styles/product.scss";
 import "styles/Layout.scss";
 import "styles/Footer.scss";
 import "styles/Header.scss";
+import "styles/DailyBestHome.scss";
 import "styles/ProductHome.scss";
 import "styles/ProductDetail.scss";
 import Head from "next/head";

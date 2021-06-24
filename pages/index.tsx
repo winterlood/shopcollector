@@ -1,19 +1,17 @@
 import React, { useRef } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { getImageByCategory, getStoredPostList } from "lib/posts";
 import Layout from "component/Layout";
-import { meta_types } from "@global_types";
-import { url } from "inspector";
+import { getDetailPostList, getSortedPostsData, getStoredPostList } from "lib/posts";
 
-const DailyBestPostItem = (props: meta_types.DailyBestItem) => {
+const CategoryItem = (props) => {
     const linkRef = useRef(null);
     return (
         <div
+            className="CategoryItem"
             onClick={() => {
                 if (linkRef.current) [linkRef.current.click()];
             }}
-            className="DailyBestPostItem"
             style={{
                 backgroundImage: `url('${props.thumbnailImageUrl}')`,
             }}
@@ -23,95 +21,98 @@ const DailyBestPostItem = (props: meta_types.DailyBestItem) => {
                     <a ref={linkRef}>{props.category}</a>
                 </Link>
             </div>
-
-            {/* {props.category} */}
-            {/* <Link href={`/dailybest/${props.id}`}>click</Link> */}
         </div>
     );
 };
 
-const DailyBestSectionItem = ({ date, itemList }: { date: string; itemList: Array<meta_types.DailyBestItem> }) => {
+const ProductItem = (props) => {
     return (
-        <div className="DailyBestSectionItem">
-            <h5>{date}</h5>
-            <div className="section_item_list">
-                {itemList.map((item, idx) => (
-                    <DailyBestPostItem key={`POSTITEM::${idx}`} {...item} />
-                ))}
+        <div className="ProductItem">
+            <div className="img_box" style={{ backgroundImage: `url('${props.productImage}')` }}></div>
+            <div className="info_box">
+                <div className="meta_info">
+                    <span className="rank">{props.rank} 위</span>
+                    <span className="category"> {props.keyword}</span>
+                </div>
+                <div className="title">
+                    <Link href={`/product/${props.id}`}>{props.productName}</Link>
+                </div>
+                <div className="badge_list">
+                    {props.isRocket && (
+                        <img
+                            alt={"로켓배송"}
+                            src={"https://image10.coupangcdn.com/image/badges/rocket/rocket_logo.png"}
+                        />
+                    )}
+                    {props.isFressShipping && <div className="freeshipping">무료 배송</div>}
+                </div>
             </div>
         </div>
     );
 };
 
 const Home = (props) => {
-    const { postData } = props;
-    const DailyBestList = postData.map((it) => it.params);
-    DailyBestList.sort((a, b) => {
-        if (a.pureCreatedDate < b.pureCreatedDate) return 1;
-        else if (a.pureCreatedDate > b.pureCreatedDate) return -1;
-        else return 0;
-    });
-    var DayList = [];
-    DailyBestList.forEach((item) => {
-        var matchIdx = DayList.findIndex((listItem) => listItem.date === item.createdDate);
-        var curItem = {
-            ...item,
-        };
-        if (matchIdx === -1) {
-            DayList.push({ date: item.createdDate, itemList: [curItem] });
-        } else {
-            DayList[matchIdx].itemList.push(curItem);
-        }
-    });
-
-    const ogObj = {
-        title: "실시간 데일리 베스트",
-        description: `${DayList.map((it) => {
-            const day = it.date;
-            const categories = it.itemList.map((item) => item.category + "TOP20").join(", ");
-            return `${day} : ${categories}`;
-        }).join(" / ")}`,
-        image: "https://images.unsplash.com/photo-1607083681678-52733140f93a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1050&q=80",
-    };
-
-    console.log(ogObj.description);
+    const { categoryList, productList } = props;
+    console.log(props);
     return (
         <Layout>
             <Head>
                 <title>실시간 데일리 베스트</title>
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                <meta name="description" content={ogObj.description} />
-                <meta property="og:title" content={ogObj.title} />
-                <meta property="og:description" content={ogObj.description} />
-                <meta property="og:image" content={ogObj.image} />
                 <meta property="og:site_name" content="쿠팡 실시간 데일리 베스트 TOP20" />
                 <meta property="og:type" content="product" />
                 <meta property="product:price:currency" content="KRW" />
                 <meta name="robots" content="index" />
             </Head>
             <div className="Home">
-                <div className="home_header">
-                    <h2>실시간 데일리 베스트</h2>
-                    <span>실시간 데일리 베스트는 2시간마다 업데이트 됩니다</span>
-                </div>
-
-                <div>
-                    <div>
-                        {DayList.map((dayItem, idx) => (
-                            <DailyBestSectionItem key={`DAILY_BEST_SECTION::${idx}`} {...dayItem} />
+                <section className="section_item">
+                    <div className="item_header">
+                        <h4># 가장 최근에 수집된 카테고리</h4>
+                        <span>
+                            <Link href={"/dailybest"}>+ 더 보기</Link>
+                        </span>
+                    </div>
+                    <div className="item_slide_list">
+                        {categoryList.map((it, idx) => (
+                            <CategoryItem key={`CATEGORY_ITEM${idx}`} {...it} />
                         ))}
                     </div>
-                </div>
+                </section>
+                <section className="section_item">
+                    <div className="item_header">
+                        <h4># 가장 최근에 수집된 상품</h4>
+                        <span>
+                            <Link href={"/product"}>+ 더 보기</Link>
+                        </span>
+                    </div>
+                    <div className="item_vertical_list">
+                        {productList.map((it, idx) => (
+                            <ProductItem key={`PRODUCT_ITEM${idx}`} {...it} />
+                        ))}
+                    </div>
+                </section>
             </div>
         </Layout>
     );
 };
 
 export async function getStaticProps({ params }) {
-    const postData = getStoredPostList();
+    const productList = getDetailPostList(true)
+        .slice(0, 5)
+        .map((it) => it.params);
+
+    const categoryList = getStoredPostList()
+        .sort((a, b) => {
+            if (a.params.pureCreatedDate < b.params.pureCreatedDate) return 1;
+            else if (a.params.pureCreatedDate > b.params.pureCreatedDate) return -1;
+            else return 0;
+        })
+        .slice(0, 15)
+        .map((it) => it.params);
     return {
         props: {
-            postData,
+            productList,
+            categoryList,
         },
     };
 }
