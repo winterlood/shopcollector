@@ -59,7 +59,18 @@ const getPostDetailPages = () => {
     return postDetailItemList;
 };
 
+const writeRobotsTxt = () => {
+    const robot = `
+    User-agent: *
+    Allow: /
+    Sitemap: https://shopcollector.vercel.app/sitemap.xml
+    `;
+
+    fs.writeFileSync(path.join("./.next/static", "robots.txt"), robot);
+};
+
 function main() {
+    writeRobotsTxt();
     const postPages = getPostPages();
     const postDetailPages = getPostDetailPages();
 
